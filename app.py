@@ -2,24 +2,13 @@ import os
 
 from datetime import timedelta
 
-from flask import Flask, render_template, Response
+from flask import Flask, render_template, Response, request
+
+from werkzeug.utils import secure_filename
 
 import json
 
-# from flask_cors import CORS
-
 app = Flask(__name__)
-
-# class CustomFlask(Flask):
-#     jinja_options = Flask.jinja_options.copy()
-#     jinja_options.update(dict(
-#         variable_start_string='%%',  # Default is '{{', I'm changing this because Vue.js uses '{{' / '}}'
-#         variable_end_string='%%',
-#     ))
-#
-#
-# app = CustomFlask(__name__)
-
 
 app.jinja_env.variable_start_string = '{['
 app.jinja_env.variable_end_string = ']}'
@@ -51,6 +40,15 @@ def data():
             y += 1
 
     return Response(json.dumps(js), mimetype='application/json')
+
+
+@app.route('/uploader', methods=['GET', 'POST'])
+def uploader():
+    if request.method == 'POST':
+        f = request.files.getlist('file')
+        for file in f:
+            file.save(os.path.join('updir/', secure_filename(file.filename)))
+        return 'file uploaded successfully'
 
 
 if __name__ == "__main__":

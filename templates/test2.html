@@ -4,17 +4,25 @@
     <meta charset="UTF-8">
     <title>Document</title>
     <style>
-        body{
-            width: 1080px;
-        }
         #app img{
             width: 100px;
             height: 100px;
+            float: left;
+        }
+        table{
+            width: 100%;
+        }
+        tbody th{
+            float: left;
         }
     </style>
 </head>
 <body>
     <div id="app">
+        <form action="/uploader" method="post" enctype="multipart/form-data">
+            <input type="file" id="file" name="file" multiple="multiple"/>
+            <button type="submit">提交</button>
+        </form>
         <button v-on:click="find()">获取图片</button>
         <table width="500px" v-for="(x, y) in msg" border="1">
             <thead>
