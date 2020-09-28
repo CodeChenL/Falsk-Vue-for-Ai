@@ -48,7 +48,7 @@ def uploader():
         f = request.files.getlist('file')
         for file in f:
             file.save(os.path.join('updir/', secure_filename(file.filename)))
-        return 'file uploaded successfully'
+        return '文件上传成功>_<'
 
 
 if __name__ == "__main__":
