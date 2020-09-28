@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        body{
+            width: 1080px;
+        }
+        #app img{
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <button v-on:click="find()">获取图片</button>
+        <table width="500px" v-for="(x, y) in msg" border="1">
+            <thead>
+                <th>{{x.type}}</th>
+            </thead>
+            <tbody>
+                <th v-for="(z, y) in x.img">
+                    <img v-bind:src="z.url"/>
+                </th>
+            </tbody>
+        </table>
+    </div>
+    <script src="/static/lib/vue.js"></script>
+    <script src="/static/lib/axios.js"></script>
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                msg:[],
+            },
+            methods: {
+                find(){
+                    axios.get('/json')
+                        .then(function (response) {
+                            console.log(response);
+                            vm.msg=response.data;
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                }
+            },
+        })
+    </script>
+</body>
+</html>

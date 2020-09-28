@@ -1,0 +1,24 @@
+[
+    {
+        "type": "玫瑰",
+        "img":[
+            {"url":"/static/img/0/image_0001.jpg"},
+            {"url":"/static/img/0/image_0001.jpg"}
+        ]
+    },
+    {
+        "type": "向日葵",
+        "img":[
+            {"url":"/static/img/0/image_0001.jpg"},
+            {"url":"/static/img/0/image_0001.jpg"}
+        ]
+    },
+    {
+        "type": "水仙花",
+        "img":[
+            {"url":"/static/img/0/image_0001.jpg"},
+            {"url":"/static/img/0/image_0001.jpg"}
+        ]
+    }
+]
+    
