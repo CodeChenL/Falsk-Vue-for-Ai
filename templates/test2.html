@@ -19,12 +19,12 @@
 </head>
 <body>
     <div id="app">
-        <form action="/uploader" method="post" enctype="multipart/form-data">
+        <form action="/uploader" id="form1" method="post" enctype="multipart/form-data">
             <input type="file" id="file" name="file" multiple="multiple"/>
             <button type="submit">提交</button>
         </form>
         <button v-on:click="find()">获取图片</button>
-        <table width="500px" v-for="(x, y) in msg" border="1">
+        <table v-for="(x, y) in msg" border="1">
             <thead>
                 <th>{{x.type}}</th>
             </thead>
@@ -45,14 +45,23 @@
             },
             methods: {
                 find(){
-                    axios.get('/json')
-                        .then(function (response) {
-                            console.log(response);
-                            vm.msg=response.data;
-                        })
-                        .catch(function (error) {
-                            console.log(error);
-                        });
+                    {#axios.get('/json')#}
+                    {#    .then(function (response) {#}
+                    {#        console.log(response);#}
+                    {#        vm.msg=response.data;#}
+                    {#    })#}
+                    {#    .catch(function (error) {#}
+                    {#        console.log(error);#}
+                    {#    });#}
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET","/json",true);
+                    xhr.send();
+                    xhr.onreadystatechange=function () {
+                        if (xhr.readyState==4&&xhr.status==200){
+                            vm.msg=JSON.parse(xhr.responseText);
+                            console.log(vm.msg);
+                        }
+                    }
                 }
             },
         })
