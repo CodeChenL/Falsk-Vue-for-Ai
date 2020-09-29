@@ -10,7 +10,8 @@
             float: left;
         }
         table{
-            width: 100%;
+            margin: 0 auto;
+            width: 1046px;
         }
         tbody th{
             float: left;
@@ -19,9 +20,9 @@
 </head>
 <body>
     <div id="app">
-        <form action="/uploader" id="form1" method="post" enctype="multipart/form-data">
+        <form action="/uploader"  method="post" enctype="multipart/form-data">
             <input type="file" id="file" name="file" multiple="multiple"/>
-            <button type="submit">提交</button>
+            <input type="submit"/>
         </form>
         <button v-on:click="find()">获取图片</button>
         <table v-for="(x, y) in msg" border="1">
@@ -36,7 +37,6 @@
         </table>
     </div>
     <script src="/static/lib/vue.js"></script>
-    <script src="/static/lib/axios.js"></script>
     <script>
         var vm = new Vue({
             el:"#app",
@@ -45,14 +45,6 @@
             },
             methods: {
                 find(){
-                    {#axios.get('/json')#}
-                    {#    .then(function (response) {#}
-                    {#        console.log(response);#}
-                    {#        vm.msg=response.data;#}
-                    {#    })#}
-                    {#    .catch(function (error) {#}
-                    {#        console.log(error);#}
-                    {#    });#}
                     var xhr = new XMLHttpRequest();
                     xhr.open("GET","/json",true);
                     xhr.send();

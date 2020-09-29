@@ -48,11 +48,12 @@ def data():
             # 再循环遍历i文件夹内的图片文件，x为文件夹名
             for x in os.listdir(path + i):
                 # 向刚刚向js数组添加的对象的img属性添加文件地址，js[y]为刚刚向js数组添加的对象，["img"]为此对象下的img属性
-                js[y]["img"].append(
-                    # 向js[y]对象下的img属性实为一个数组，添加文件的地址url
-                    # 在flask框架里静态文件可以放在同目录下的static文件夹里，运行服务时可自动相应，无需再写路由
-                    {"url": "/static/" + "img/" + i + "/" + x}
-                )
+                if len(js[y]["img"]) <= 9:
+                    js[y]["img"].append(
+                        # 向js[y]对象下的img属性实为一个数组，添加文件的地址url
+                        # 在flask框架里静态文件可以放在同目录下的static文件夹里，运行服务时可自动相应，无需再写路由
+                        {"url": "/static/" + "img/" + i + "/" + x}
+                    )
             # js的数组下标y的值+1
             y += 1
     # 以json数据格式返回js这个数组，json.dumps可将 Python 对象编码成 JSON 字符串，mimetype='application/json'可将json字符串转换成json数据
