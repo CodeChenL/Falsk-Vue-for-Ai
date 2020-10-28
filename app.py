@@ -29,7 +29,7 @@ def index():
 @app.route('/json')
 def data():
     # 设置要检索的路径
-    path = "C:/Users/PC/Desktop/FlaskWebForAi/static/img/"
+    path = "./static/img/"
     # 初始化要返回的json数据
     js = []
     # 初始化js[]数组的下标
