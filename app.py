@@ -3,7 +3,7 @@ import os
 
 from datetime import timedelta
 
-from flask import Flask, render_template, Response, request
+from flask import Flask, Response, send_file, request
 
 
 import json
@@ -11,9 +11,6 @@ import json
 # 创建一个Flask程序
 app = Flask(__name__)
 
-# 修改jinja的修饰符，否则会和Vue的{{}}修饰符冲突
-app.jinja_env.variable_start_string = '{['
-app.jinja_env.variable_end_string = ']}'
 
 # 设置静态文件的过期时间，否则可能不能即使更新页面数据
 app.send_file_max_age_default = timedelta(seconds=1)
@@ -22,7 +19,7 @@ app.send_file_max_age_default = timedelta(seconds=1)
 # 浏览器访问"/"路径时，返回test2.html页面
 @app.route('/')
 def index():
-    return render_template('test2.html')
+    return send_file('static/test2.html')
 
 
 # 浏览器请求"/json"时，相应json数据
@@ -75,4 +72,7 @@ def uploader():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(
+        debug=True,
+        host="0.0.0.0"
+    )
